@@ -19,12 +19,64 @@ services:
       - inception
 
     restart: unless-stopped
+  wordpress:
+    build:
+      context: ./requirements/wordpress
+
+    container_name: wordpress
+
+    env_file:
+      - .env
+
+    secrets:
+      - db_password
+      - wp_admin_password
+      - wp_user_password
+    
+    volumes:
+      - wordpress_data:/var/www/html
+    
+    networks:
+      - inception
+
+    depends_on:
+      - mariadb
+
+    restart: unless-stopped
+  
+  nginx:
+    build:
+      context: ./requirements/nginx
+    
+    container_name: nginx
+
+    env_file:
+      - .env
+
+    ports:
+      - "443:443"
+
+    volumes:
+      - wordpress_data:/var/www/html/
+    
+    networks:
+      - inception
+    
+    depends_on:
+      - wordpress
+
+    restart: unless-stopped
 
 secrets:
   db_password:
     file: ../secrets/db_password.txt
   db_root_password:
     file: ../secrets/db_root_password.txt
+  wp_admin_password:
+    file: ../secrets/wp_admin_password.txt
+  wp_user_password:
+    file: ../secrets/wp_user_password.txt
+    
 
 volumes:
   mariadb_data:
@@ -33,6 +85,12 @@ volumes:
       type: none
       o: bind
       device: /home/marcudos/data/mariadb
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/marcudos/data/wordpress
 
 networks:
   inception:
