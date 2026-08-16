@@ -2,7 +2,8 @@ FROM debian:12
 
 RUN apt-get update && \
     apt-get install -y mariadb-server gosu && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /var/lib/mysql/*
 
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
