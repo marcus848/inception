@@ -5,6 +5,7 @@ RUN apt-get update && \
         php-fpm \
         php-mysql \
         php-redis \
+        redis-tools \
         mariadb-client \
         curl \
         ca-certificates && \
