@@ -56,7 +56,13 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 
 fi
 
-# Redis object cache configuration.
+echo "Waiting for Redis..."
+until redis-cli -h redis ping 2>/dev/null | grep -q PONG
+do
+    sleep 2
+done
+echo "Redis is ready."
+
 wp config set WP_REDIS_HOST redis --type=constant --allow-root
 wp config set WP_REDIS_PORT 6379 --raw --type=constant --allow-root
 
@@ -66,9 +72,7 @@ elif ! wp plugin is-active redis-cache --allow-root; then
     wp plugin activate redis-cache --allow-root
 fi
 
-# Enabling can briefly fail while Redis is still starting; the plugin remains
-# installed and the next container start will retry automatically.
-wp redis enable --allow-root || true
+wp redis enable --allow-root
 
 chown -R www-data:www-data /var/www/html
 
