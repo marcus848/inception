@@ -15,6 +15,15 @@ services:
       - inception
     restart: unless-stopped
 
+  redis:
+    build:
+      context: ./requirements/redis
+    image: redis:bookworm
+    container_name: redis
+    networks:
+      - inception
+    restart: unless-stopped
+
   wordpress:
     build:
       context: ./requirements/wordpress
@@ -32,6 +41,7 @@ services:
       - inception
     depends_on:
       - mariadb
+      - redis
     restart: unless-stopped
 
   nginx:
