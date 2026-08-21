@@ -2,69 +2,53 @@ services:
   mariadb:
     build:
       context: ./requirements/mariadb
-
+    image: mariadb:bookworm
     container_name: mariadb
-
     env_file:
       - .env
-
     secrets:
       - db_password
       - db_root_password
-
     volumes:
       - mariadb_data:/var/lib/mysql
-
     networks:
       - inception
-
     restart: unless-stopped
+
   wordpress:
     build:
       context: ./requirements/wordpress
-
+    image: wordpress:bookworm
     container_name: wordpress
-
     env_file:
       - .env
-
     secrets:
       - db_password
       - wp_admin_password
       - wp_user_password
-    
     volumes:
       - wordpress_data:/var/www/html
-    
     networks:
       - inception
-
     depends_on:
       - mariadb
-
     restart: unless-stopped
-  
+
   nginx:
     build:
       context: ./requirements/nginx
-    
+    image: nginx:bookworm
     container_name: nginx
-
     env_file:
       - .env
-
     ports:
       - "443:443"
-
     volumes:
-      - wordpress_data:/var/www/html/
-    
+      - wordpress_data:/var/www/html
     networks:
       - inception
-    
     depends_on:
       - wordpress
-
     restart: unless-stopped
 
 secrets:
@@ -76,7 +60,6 @@ secrets:
     file: ../secrets/wp_admin_password.txt
   wp_user_password:
     file: ../secrets/wp_user_password.txt
-    
 
 volumes:
   mariadb_data:
