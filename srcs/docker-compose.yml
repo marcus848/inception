@@ -103,6 +103,22 @@ services:
       - inception
     restart: unless-stopped
 
+  monitor:
+    build:
+      context: ./requirements/monitor
+    image: monitor:bookworm
+    container_name: monitor
+    ports:
+      - "8082:8082"
+    networks:
+      - inception
+    depends_on:
+      - wordpress
+      - mariadb
+      - redis
+      - adminer
+    restart: unless-stopped
+
 secrets:
   db_password:
     file: ../secrets/db_password.txt
