@@ -61,6 +61,19 @@ services:
       - wordpress
     restart: unless-stopped
 
+  adminer:
+    build:
+      context: ./requirements/adminer
+    image: adminer:bookworm
+    container_name: adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - inception
+    depends_on:
+      - mariadb
+    restart: unless-stopped
+
 secrets:
   db_password:
     file: ../secrets/db_password.txt
