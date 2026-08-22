@@ -89,6 +89,8 @@ Documentation used during development:
 
 ### AI usage
 
+AI tool used: **ChatGPT (OpenAI)**.
+
 AI was used as a learning and development assistant throughout the project. It was used to:
 
 - Explain Docker concepts such as images, containers, Dockerfiles, networks, DNS, volumes, bind mounts and secrets.
