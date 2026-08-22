@@ -2,6 +2,7 @@ FROM debian:12
 
 RUN apt-get update && \
     apt-get install -y vsftpd && \
+    mkdir -p /var/run/vsftpd/empty && \
     rm -rf /var/lib/apt/lists/*
 
 COPY conf/vsftpd.conf /etc/vsftpd.conf
