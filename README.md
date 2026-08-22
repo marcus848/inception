@@ -72,14 +72,36 @@ More information is available in [USER_DOC.md](USER_DOC.md) and [DEV_DOC.md](DEV
 
 Documentation used during development:
 
-- Docker documentation
-- Docker Compose documentation
-- NGINX documentation
-- MariaDB documentation
-- WordPress and WP-CLI documentation
-- Redis documentation
-- vsftpd documentation
+- [Docker Documentation](https://docs.docker.com/)
+- [Docker Compose Documentation](https://docs.docker.com/compose/)
+- [Dockerfile Reference](https://docs.docker.com/reference/dockerfile/)
+- [Docker Networking](https://docs.docker.com/engine/network/)
+- [Docker Volumes](https://docs.docker.com/engine/storage/volumes/)
+- [Docker Secrets](https://docs.docker.com/compose/how-tos/use-secrets/)
+- [NGINX Documentation](https://nginx.org/en/docs/)
+- [PHP-FPM Documentation](https://www.php.net/manual/en/install.fpm.php)
+- [MariaDB Documentation](https://mariadb.com/docs/)
+- [WordPress Documentation](https://wordpress.org/documentation/)
+- [WP-CLI Documentation](https://wp-cli.org/)
+- [Redis Documentation](https://redis.io/docs/latest/)
+- [Adminer](https://www.adminer.org/)
+- [vsftpd](https://security.appspot.com/vsftpd.html)
 
 ### AI usage
 
-AI was used as a learning and development assistant to explain Docker concepts, review configuration files and scripts, help debug errors, review the project requirements and assist with documentation. All suggestions were reviewed and tested during development.
+AI was used as a learning and development assistant throughout the project. It was used to:
+
+- Explain Docker concepts such as images, containers, Dockerfiles, networks, DNS, volumes, bind mounts and secrets.
+- Explain the differences between Docker containers and virtual machines.
+- Explain how NGINX, PHP-FPM, WordPress and MariaDB communicate with each other.
+- Help understand TLS, HTTPS and the role of NGINX as the only entrypoint of the mandatory infrastructure.
+- Help design and review Dockerfiles, Docker Compose configuration and initialization scripts.
+- Help understand process management inside containers, including PID 1, `ENTRYPOINT`, `CMD` and `exec`.
+- Assist with the configuration of MariaDB, WordPress, PHP-FPM and NGINX.
+- Help debug build errors, container startup errors, permissions, networking and service connectivity.
+- Assist with the bonus services: Redis cache, FTP, Adminer, static website and monitoring service.
+- Review the implementation against the Inception subject and evaluation requirements.
+- Suggest commands and procedures for manually testing containers, volumes, networks, persistence, TLS and database connectivity.
+- Assist in writing and reviewing the project documentation.
+
+AI suggestions were not treated as final implementations automatically. The generated explanations and code suggestions were reviewed, adapted and tested manually during development to ensure that the final infrastructure worked correctly and that its behavior was understood.
